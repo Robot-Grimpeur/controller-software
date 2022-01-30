@@ -1,0 +1,35 @@
+@import 'bulma/bulma.sass';
+
+html {
+  overflow: hidden;
+}
+
+aside.menu,
+main {
+  height: calc(100vh - $navbar-height - $navbar-padding-vertical + 4px);
+  padding: 25px;
+}
+
+aside.menu {
+  float: left;
+  width: max(20vw, 250px);
+  background-color: $white-ter;
+
+  .menu-list a {
+    &:hover:not(.is-active) {
+      background-color: white;
+    }
+  }
+}
+
+main {
+  overflow-y: auto;
+}
+
+progress {
+  @extend .progress;
+}
+
+input {
+  @extend .input;
+}

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+npm run build
+ssh robot "
+sudo pm2 delete controller-software
+cd /home/pi/robot
+ls -Q | grep -v node_modules | xargs rm -rf
+"
+scp -r package*.json build/* pm2.config.cjs patches robot:/home/pi/robot
+ssh robot "
+cd /home/pi/robot
+npm set-script prepare \"\"
+npm i --only=production
+sudo pm2 start pm2.config.cjs
+sudo pm2 save
+"
